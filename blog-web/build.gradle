@@ -1,0 +1,42 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'com.timwang'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+// 编译返回的json 乱码设置
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+dependencies {
+    implementation project(':blog-core')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
+    // https://mvnrepository.com/artifact/com.alibaba/druid
+    implementation 'com.alibaba:druid:1.1.10'
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation 'mysql:mysql-connector-java:5.1.47'
+
+}
+
+test {
+    useJUnitPlatform()
+}
